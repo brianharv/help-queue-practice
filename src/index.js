@@ -5,9 +5,9 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import reducer from './reducers/ticket-list-reducer';
+import rootReducer from './reducers/index';
 
-const store = createStore(reducer); //const store is the prop that we pass down to our connect components
+const store = createStore(rootReducer); //const store is the prop that we pass down to our connect components // store is a property of Provider and dispatch is a method of store.
 
 store.subscribe(() =>
   console.log(store.getState())
