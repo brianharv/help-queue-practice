@@ -3,12 +3,13 @@ import Ticket from './Ticket';
 import PropTypes from 'prop-types';
 
 const TicketList = props => {
+  const { ticketList, onTicketSelection } = props;
   return(
     <React.Fragment>
       <hr/>
-      {props.ticketList.map((ticket) =>
+      {Object.values(ticketList).map((ticket) =>
         <Ticket
-          whenTicketClicked={props.onTicketSelection} // this has to be props because it's coming from above and not .map()
+          whenTicketClicked={onTicketSelection} // this has to be props because it's coming from above and not .map()
           names={ticket.names}
           location={ticket.location}
           issue={ticket.issue}
@@ -21,7 +22,7 @@ const TicketList = props => {
 }
 
 TicketList.propTypes = {
-  ticketList: PropTypes.array,
+  ticketList: PropTypes.object,
   onTicketSelection: PropTypes.func
 }
 
