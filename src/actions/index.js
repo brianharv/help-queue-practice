@@ -5,16 +5,16 @@ export const deleteTicket = id => ({
   id
 });
 
-export const addTicket = ticket => {
-  const { id, names, location, issue } = ticket;
-  return {
-    type: c.ADD_TICKET,
-    id: id,
-    names: names,
-    location: location,
-    issue: issue
-  }
-}
+// export const addTicket = ticket => {
+//   const { id, names, location, issue } = ticket;
+//   return {
+//     type: c.ADD_TICKET,
+//     id: id,
+//     names: names,
+//     location: location,
+//     issue: issue
+//   }
+// }
 
 export const toggleForm = () => {
   return {

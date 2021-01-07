@@ -29,10 +29,10 @@ class TicketControl extends React.Component {
     }
   }
 
-  handleAddingNewTicketToList = (newTicket) => {
+  handleAddingNewTicketToList = () => {
     const { dispatch } = this.props; // REMEMBER this.props is referring to connect which is wrapping TicketControl. It's grabbing the props from the HOC
-    const action = a.addTicket(newTicket);
-    dispatch(action);
+    // const action = a.addTicket());
+    // dispatch(action);
     const action2 = a.toggleForm();
     dispatch(action2);
   }
@@ -58,14 +58,12 @@ class TicketControl extends React.Component {
     })
   }
 
-  handleEditingTicketInList = ticketToEdit => {
-    const { dispatch } = this.props;
-    dispatch(a.addTicket(ticketToEdit));
-    this.setState({
-      selectedTicket: null,
-      editing: false
-    })
-  }
+  // handleEditingTicketInList = () => {
+  //   this.setState({
+  //     selectedTicket: null,
+  //     editing: false
+  //   })
+  // }
 
 
   render() {
