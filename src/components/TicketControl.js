@@ -5,13 +5,13 @@ import TicketDetail from './TicketDetail';
 import EditTicketForm from './EditTicketForm'; 
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import * as a from '../actions/index';
 
 class TicketControl extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      // formVisibleOnPage: false,
       selectedTicket: null,
       editing: false,
     };
@@ -25,27 +25,15 @@ class TicketControl extends React.Component {
       });
     } else {
       const { dispatch } = this.props;
-      const action = {
-        type: 'TOGGLE_FORM'
-      }
-      dispatch(action);
+      dispatch(a.toggleForm());
     }
   }
 
   handleAddingNewTicketToList = (newTicket) => {
     const { dispatch } = this.props; // REMEMBER this.props is referring to connect which is wrapping TicketControl. It's grabbing the props from the HOC
-    const { names, location, issue, id } = newTicket;
-    const action = {
-      type: 'ADD_TICKET',
-      id: id,
-      names: names,
-      location: location,
-      issue: issue
-    }
+    const action = a.addTicket(newTicket);
     dispatch(action);
-    const action2 = {
-      type: 'TOGGLE_FORM'
-    }
+    const action2 = a.toggleForm();
     dispatch(action2);
   }
 
@@ -58,18 +46,13 @@ class TicketControl extends React.Component {
 
   handleDeletingTicket = id => {
     const { dispatch } = this.props;
-    const action = {
-      type: 'DELETE_TICKET',
-      id: id // just need id because that is the key in the masterTicketList object State slice
-    }
-    dispatch(action);
+    dispatch(a.deleteTicket(id));
     this.setState({
       selectedTicket: null
     })
   }
 
   handleEditClick = () => {
-    console.log("handleEditClick reached")
     this.setState({
       editing: true
     })
@@ -77,15 +60,7 @@ class TicketControl extends React.Component {
 
   handleEditingTicketInList = ticketToEdit => {
     const { dispatch } = this.props;
-    const { names, id, location, issue } = ticketToEdit; // REMEMBER you're only destructuring the parameter and can only take out of the parameter what info it has.
-    const action = {
-      type: 'ADD_TICKET',
-      id: id,
-      names: names,
-      location: location,
-      issue: issue
-    }
-    dispatch(action);
+    dispatch(a.addTicket(ticketToEdit));
     this.setState({
       selectedTicket: null,
       editing: false
